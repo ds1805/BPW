@@ -174,6 +174,15 @@ export default function Hero() {
       ref={ref}
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      style={{
+        minHeight: "100vh",
+        position: "relative",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "#29231F",
+      }}
     >
       {/* Background with parallax */}
       <motion.div className="absolute inset-0" style={{ y }}>
@@ -192,12 +201,16 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-6 flex flex-col items-center"
         >
-          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden border-2 border-gold/80 bg-white/95 p-1.5 shadow-2xl mb-4 shadow-black/40">
+          <div
+            className="rounded-full overflow-hidden border-2 border-[#C49A52] bg-white p-1 shadow-2xl mb-4 flex items-center justify-center flex-shrink-0"
+            style={{ width: "112px", height: "112px" }}
+          >
             <Image
               src="/images/bpw-logo.jpg"
               alt="Bhaiji Pede Wale Churu Logo"
-              fill
-              className="object-contain p-1"
+              width={104}
+              height={104}
+              className="rounded-full object-contain"
               priority
             />
           </div>

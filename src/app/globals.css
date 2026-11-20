@@ -11,6 +11,20 @@
   --charcoal: #29231f;
 }
 
+@theme inline {
+  --color-maroon: #641e24;
+  --color-burgundy: #47191d;
+  --color-sand: #d8b98c;
+  --color-gold: #c49a52;
+  --color-gold-light: #d4b472;
+  --color-ivory: #f7f0e4;
+  --color-terracotta: #a65f42;
+  --color-charcoal: #29231f;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-devanagari: "Tiro Devanagari Hindi", serif;
+}
+
 *,
 *::before,
 *::after {

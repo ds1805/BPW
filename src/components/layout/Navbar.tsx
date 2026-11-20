@@ -39,6 +39,14 @@ export function Navbar() {
             ? "bg-[#47191D] shadow-xl shadow-black/20"
             : "bg-transparent"
         }`}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 50,
+          backgroundColor: isScrolled ? "#47191D" : "transparent",
+        }}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -56,12 +64,16 @@ export function Navbar() {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo / Brand */}
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-11 h-11 rounded-full overflow-hidden border-2 border-gold/70 bg-white/95 p-0.5 shadow-md transition-transform group-hover:scale-105">
+              <div
+                className="rounded-full overflow-hidden border-2 border-[#C49A52] bg-white p-0.5 shadow-md transition-transform group-hover:scale-105 flex items-center justify-center flex-shrink-0"
+                style={{ width: "44px", height: "44px" }}
+              >
                 <Image
                   src="/images/bpw-logo.jpg"
                   alt="Bhaiji Pede Wale Logo"
-                  fill
-                  className="object-contain p-0.5"
+                  width={40}
+                  height={40}
+                  className="rounded-full object-contain"
                   priority
                 />
               </div>

@@ -182,12 +182,16 @@ export default function ClosingStatement() {
           <div
             className="inline-flex items-center gap-3 mb-6"
           >
-            <div className="relative w-14 h-14 rounded-full overflow-hidden border-2 border-gold/70 bg-white/95 p-1 shadow-lg">
+            <div
+              className="rounded-full overflow-hidden border-2 border-[#C49A52] bg-white p-1 shadow-lg flex items-center justify-center flex-shrink-0"
+              style={{ width: "56px", height: "56px" }}
+            >
               <Image
                 src="/images/bpw-logo.jpg"
                 alt="Bhaiji Pede Wale Logo"
-                fill
-                className="object-contain p-0.5"
+                width={48}
+                height={48}
+                className="rounded-full object-contain"
               />
             </div>
             <div className="text-left">

@@ -25,12 +25,16 @@ export function Footer() {
               <div
                 className="inline-flex items-center gap-3 mb-4"
               >
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-gold/70 bg-white/95 p-0.5 shadow-md">
+                <div
+                  className="rounded-full overflow-hidden border-2 border-[#C49A52] bg-white p-0.5 shadow-md flex items-center justify-center flex-shrink-0"
+                  style={{ width: "48px", height: "48px" }}
+                >
                   <Image
                     src="/images/bpw-logo.jpg"
                     alt="BPW Logo"
-                    fill
-                    className="object-contain p-0.5"
+                    width={42}
+                    height={42}
+                    className="rounded-full object-contain"
                   />
                 </div>
                 <div>
@@ -66,13 +70,13 @@ export function Footer() {
             >
               Explore
             </h3>
-            <nav className="flex flex-col gap-3">
+            <nav className="flex flex-col gap-3" style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm transition-colors duration-200 hover:text-gold"
-                  style={{ color: "rgba(247,240,228,0.65)" }}
+                  className="text-sm transition-colors duration-200 hover:text-gold block"
+                  style={{ color: "rgba(247,240,228,0.75)", display: "block" }}
                 >
                   {link.label}
                 </Link>

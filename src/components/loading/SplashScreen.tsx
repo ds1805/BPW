@@ -90,7 +90,20 @@ export default function SplashScreen({ onComplete }: { onComplete: () => void })
       {phase !== "exit" ? (
         <motion.div
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center overflow-hidden"
-          style={{ background: "#47191D" }}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 100,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "#47191D",
+            overflow: "hidden",
+          }}
           exit={{
             clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
             transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] },
@@ -152,12 +165,16 @@ export default function SplashScreen({ onComplete }: { onComplete: () => void })
               transition={{ duration: 0.7, ease: [0.25, 0.46, 0.45, 0.94] }}
               className="flex flex-col items-center"
             >
-              <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-gold/80 bg-white/95 p-1 shadow-2xl mb-2">
+              <div
+                className="rounded-full overflow-hidden border-2 border-[#C49A52] bg-white p-1 shadow-2xl mb-3 flex items-center justify-center flex-shrink-0"
+                style={{ width: "120px", height: "120px" }}
+              >
                 <Image
                   src="/images/bpw-logo.jpg"
                   alt="Bhaiji Pede Wale"
-                  fill
-                  className="object-contain p-1"
+                  width={110}
+                  height={110}
+                  className="rounded-full object-contain"
                   priority
                 />
               </div>
@@ -222,6 +239,18 @@ export default function SplashScreen({ onComplete }: { onComplete: () => void })
               </p>
             </motion.div>
           </div>
+
+          {/* Enter / Skip CTA */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onComplete();
+            }}
+            className="absolute bottom-6 right-8 text-xs tracking-widest uppercase transition-colors z-20 cursor-pointer"
+            style={{ color: "rgba(196,154,82,0.8)" }}
+          >
+            Enter ➔
+          </button>
 
           {/* Bottom gold line */}
           <motion.div
