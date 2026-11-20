@@ -7,37 +7,37 @@ import { motion, useInView } from "framer-motion";
 const craftSteps = [
   {
     number: "01",
-    title: "The Ingredients",
+    title: "The Purest Ingredients",
     description:
-      "[DESCRIPTION OF INGREDIENTS – to be provided by the family. Example: Pure milk, sugar, and [specific ingredients] sourced from trusted suppliers — the same quality that has defined Bhaiji Pede Wale since the beginning.]",
+      "Everything begins with pure, rich whole milk, simmered fresh daily in heavy traditional iron kadhais. No chemical essences, preservatives, or artificial thickeners — only pristine dairy, unrefined sugar, freshly crushed green cardamom, and Kashmir saffron.",
     icon: "✦",
   },
   {
     number: "02",
-    title: "Traditional Preparation",
+    title: "Slow Roasting & The Mawa",
     description:
-      "[DESCRIPTION OF PREPARATION PROCESS – to be provided by the family. The traditional method of reducing milk, the temperature, the timing — every step matters.]",
+      "Hours of patient, rhythmic stirring over a steady low flame reduce the milk into dense, golden mawa (khoya). This painstaking craft requires a master's eye — knowing by aroma and texture the precise moment the caramelization achieves its rich, nutty character.",
     icon: "◆",
   },
   {
     number: "03",
-    title: "The Craft",
+    title: "The Artisan's Hand",
     description:
-      "[DESCRIPTION OF THE CRAFTSMANSHIP – how Pede are shaped, the hand technique, the expertise developed over generations that cannot be replicated by machines.]",
+      "Handcrafted while still warm, each portion is rolled and pressed between experienced palms. The subtle central dimple and delicate dusting of aromatic spices are the authentic hallmarks of Shekhawati confectionery that cannot be replicated by machinery.",
     icon: "✦",
   },
   {
     number: "04",
-    title: "The Final Pede",
+    title: "The Golden Perfection",
     description:
-      "[DESCRIPTION OF THE FINISHED PRODUCT – the texture, appearance, and characteristics that make Bhaiji Pede Wale's Pede distinctive and recognizable.]",
+      "Dense yet soft, gently grainy yet melting upon the palate. The balance of caramelized sweetness and earthy milk undertones creates the signature texture that has made Bhaiji Pede Wale a household name for generations.",
     icon: "◆",
   },
   {
     number: "05",
-    title: "The Experience",
+    title: "The Taste That Travels",
     description:
-      "[DESCRIPTION OF THE TASTING EXPERIENCE – the first bite, the flavour, the texture, the lingering memory that keeps people coming back.]",
+      "With every bite comes the warmth of Churu's royal heritage and desert hospitality. It is this unforgettable comfort that inspires travellers from across India to carry Bhaiji's Pede home to their loved ones.",
     icon: "✦",
   },
 ];
@@ -63,8 +63,11 @@ function CraftStep({
       {/* Step number */}
       <div className="flex-shrink-0">
         <div
-          className="w-16 h-16 flex items-center justify-center rounded-full border"
-          style={{ borderColor: "rgba(196,154,82,0.4)", background: "rgba(71,25,29,0.05)" }}
+          className="w-16 h-16 flex items-center justify-center rounded-full border shadow-inner"
+          style={{
+            borderColor: "rgba(196,154,82,0.5)",
+            background: "rgba(100,30,36,0.6)",
+          }}
         >
           <span
             className="font-serif font-bold text-lg"
@@ -76,16 +79,22 @@ function CraftStep({
       </div>
 
       {/* Content */}
-      <div className="flex-1 pb-10 border-b" style={{ borderColor: "rgba(196,154,82,0.15)" }}>
+      <div
+        className="flex-1 pb-10 border-b"
+        style={{ borderColor: "rgba(196,154,82,0.2)" }}
+      >
         <h3
-          className="font-serif text-xl md:text-2xl mb-3"
-          style={{ color: "#47191D" }}
+          className="font-serif text-xl md:text-2xl mb-3 flex items-center gap-3"
+          style={{ color: "#F7F0E4" }}
         >
-          {step.title}
+          <span>{step.title}</span>
+          <span className="text-xs opacity-50" style={{ color: "#C49A52" }}>
+            {step.icon}
+          </span>
         </h3>
         <p
-          className="text-sm leading-relaxed"
-          style={{ color: "#29231F", opacity: 0.75 }}
+          className="text-sm md:text-base leading-relaxed font-sans"
+          style={{ color: "rgba(247,240,228,0.85)" }}
         >
           {step.description}
         </p>
@@ -221,25 +230,25 @@ export default function TheArt() {
 
             {/* Quote block below image */}
             <div
-              className="mt-6 p-5 relative"
+              className="mt-6 p-5 relative rounded-sm"
               style={{
-                background: "rgba(100,30,36,0.3)",
+                background: "rgba(100,30,36,0.5)",
                 borderLeft: "2px solid #C49A52",
               }}
             >
               <p
                 className="font-serif italic text-sm leading-relaxed"
-                style={{ color: "rgba(247,240,228,0.8)" }}
+                style={{ color: "rgba(247,240,228,0.9)" }}
               >
                 &ldquo;What we make cannot be rushed. It never was, and it
                 never will be. The craft demands patience. And the people who
                 love it deserve nothing less.&rdquo;
               </p>
               <p
-                className="text-xs mt-3 tracking-wide"
-                style={{ color: "#C49A52" }}
+                className="text-xs mt-3 tracking-wider font-serif"
+                style={{ color: "#D8B98C" }}
               >
-                — [FAMILY MEMBER] · [GENERATION]
+                — Tradition & Craftsmanship &bull; Bhaiji Pede Wale, Churu
               </p>
             </div>
           </motion.div>
