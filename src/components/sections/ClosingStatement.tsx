@@ -147,10 +147,12 @@ export default function ClosingStatement() {
 
         {/* Devanagari subtitle */}
         <motion.p
-          className="mb-12 text-lg"
+          className="mb-12 text-xl"
           style={{
-            fontFamily: "Tiro Devanagari Hindi, serif",
-            color: "rgba(196,154,82,0.7)",
+            fontFamily: "'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif",
+            color: "rgba(196,154,82,0.85)",
+            letterSpacing: "normal",
+            textTransform: "none",
           }}
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

@@ -78,8 +78,13 @@ export default async function ProductDetailPage({ params }: Props) {
             <div>
               {product.nameHindi && (
                 <p
-                  className="text-base mb-2"
-                  style={{ fontFamily: "Tiro Devanagari Hindi, serif", color: "#C49A52" }}
+                  className="text-lg mb-2 font-medium"
+                  style={{
+                    fontFamily: "'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif",
+                    color: "#C49A52",
+                    letterSpacing: "normal",
+                    textTransform: "none",
+                  }}
                 >
                   {product.nameHindi}
                 </p>

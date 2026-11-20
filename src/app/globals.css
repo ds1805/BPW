@@ -25,6 +25,14 @@
   --font-devanagari: "Tiro Devanagari Hindi", serif;
 }
 
+/* Devanagari script connection safeguard */
+.font-devanagari,
+[style*="Devanagari"] {
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
 *,
 *::before,
 *::after {

@@ -219,25 +219,35 @@ export default function Hero() {
           <OrnamentalTop />
         </motion.div>
 
-        {/* Devanagari subtitle */}
-        <motion.p
-          className="text-sm tracking-widest uppercase mb-4"
-          style={{
-            color: "#C49A52",
-            fontFamily: "Inter, sans-serif",
-            letterSpacing: "0.3em",
-          }}
+        {/* Devanagari & Heritage subtitle */}
+        <motion.div
+          className="flex items-center justify-center flex-wrap gap-2 mb-4"
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
         >
-          <span style={{ fontFamily: "Tiro Devanagari Hindi, serif", fontSize: "1rem" }}>
+          <span
+            style={{
+              fontFamily: "'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif",
+              fontSize: "1.15rem",
+              letterSpacing: "normal",
+              textTransform: "none",
+              color: "#C49A52",
+              lineHeight: 1,
+            }}
+          >
             भाई जी पेड़े वाले
           </span>
-          <span className="ml-3 text-xs" style={{ fontFamily: "Inter" }}>
+          <span
+            className="text-xs uppercase tracking-widest font-medium"
+            style={{
+              fontFamily: "Inter, sans-serif",
+              color: "rgba(196, 154, 82, 0.85)",
+            }}
+          >
             · Since {brand.since} · Churu, Rajasthan
           </span>
-        </motion.p>
+        </motion.div>
 
         {/* Main headline */}
         <motion.h1

@@ -22,14 +22,19 @@ export default function OurPedePage() {
               "linear-gradient(90deg, transparent, #C49A52, transparent)",
           }}
         />
-        <span
-          className="text-xs tracking-widest uppercase block mb-4"
-          style={{ color: "#C49A52" }}
-        >
-          <span style={{ fontFamily: "Tiro Devanagari Hindi, serif" }}>
+        <div className="mb-4">
+          <span
+            style={{
+              fontFamily: "'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif",
+              fontSize: "1.2rem",
+              color: "#C49A52",
+              letterSpacing: "normal",
+              textTransform: "none",
+            }}
+          >
             पेड़ा
           </span>
-        </span>
+        </div>
         <h1
           className="font-serif text-4xl md:text-5xl"
           style={{ color: "#F7F0E4" }}

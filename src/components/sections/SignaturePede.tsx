@@ -79,8 +79,13 @@ function ProductCard({ product }: { product: (typeof products)[0] }) {
       <div>
         {product.nameHindi && (
           <p
-            className="text-xs mb-1"
-            style={{ color: "#C49A52", fontFamily: "Tiro Devanagari Hindi, serif" }}
+            className="text-sm mb-1 font-medium"
+            style={{
+              color: "#C49A52",
+              fontFamily: "'Tiro Devanagari Hindi', 'Noto Serif Devanagari', serif",
+              letterSpacing: "normal",
+              textTransform: "none",
+            }}
           >
             {product.nameHindi}
           </p>
