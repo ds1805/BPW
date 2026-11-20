@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import Image from "next/image";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { galleryImages } from "@/data/gallery";
 import { testimonials } from "@/data/testimonials";
@@ -16,14 +17,16 @@ const categories = [
 
 function GalleryItem({ image, index }: { image: (typeof galleryImages)[0]; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
+  const isRealImage = !image.src.includes("placeholder");
 
   return (
     <>
       <motion.div
-        className="relative overflow-hidden cursor-pointer group"
+        className="relative overflow-hidden cursor-pointer group rounded-sm shadow-md"
         style={{
-          border: "1px solid rgba(196,154,82,0.2)",
+          border: "1px solid rgba(196,154,82,0.3)",
           gridRow: index % 5 === 0 ? "span 2" : "span 1",
+          minHeight: index % 5 === 0 ? "340px" : "220px",
         }}
         onClick={() => setIsOpen(true)}
         whileHover={{ scale: 1.02 }}
@@ -32,37 +35,54 @@ function GalleryItem({ image, index }: { image: (typeof galleryImages)[0]; index
         viewport={{ once: true }}
         transition={{ delay: index * 0.08, duration: 0.5 }}
       >
-        {/* Photo placeholder */}
-        <div
-          className="w-full h-full min-h-[200px] flex flex-col items-center justify-center"
-          style={{
-            background:
-              index % 3 === 0
-                ? "rgba(71,25,29,0.12)"
-                : index % 3 === 1
-                ? "rgba(100,30,36,0.08)"
-                : "rgba(196,154,82,0.08)",
-          }}
-        >
-          <span
-            className="text-xs text-center px-4"
-            style={{ color: "rgba(196,154,82,0.5)" }}
+        {isRealImage ? (
+          <div className="relative w-full h-full min-h-[220px]">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className="object-cover transition-transform duration-700 group-hover:scale-108"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          </div>
+        ) : (
+          <div
+            className="w-full h-full min-h-[220px] flex flex-col items-center justify-center p-6 text-center"
+            style={{
+              background:
+                index % 3 === 0
+                  ? "rgba(71,25,29,0.18)"
+                  : index % 3 === 1
+                  ? "rgba(100,30,36,0.12)"
+                  : "rgba(196,154,82,0.12)",
+            }}
           >
-            {image.alt}
-          </span>
-        </div>
+            <span className="text-xl mb-2" style={{ color: "#C49A52" }}>✦</span>
+            <span
+              className="text-xs text-center px-4 font-serif"
+              style={{ color: "rgba(196,154,82,0.7)" }}
+            >
+              {image.alt}
+            </span>
+          </div>
+        )}
 
         {/* Caption overlay on hover */}
         <div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end"
-          style={{ background: "linear-gradient(to top, rgba(71,25,29,0.9), transparent)" }}
+          style={{ background: "linear-gradient(to top, rgba(41,35,31,0.92) 0%, rgba(71,25,29,0.5) 50%, transparent 100%)" }}
         >
-          <p
-            className="p-4 text-xs leading-relaxed"
-            style={{ color: "#F7F0E4" }}
-          >
-            {image.caption}
-          </p>
+          <div className="p-4 w-full">
+            <p
+              className="text-xs leading-relaxed font-medium"
+              style={{ color: "#F7F0E4" }}
+            >
+              {image.caption}
+            </p>
+            <span className="text-[10px] uppercase tracking-wider block mt-1" style={{ color: "#D8B98C" }}>
+              Click to view details ➔
+            </span>
+          </div>
         </div>
       </motion.div>
 
@@ -70,51 +90,63 @@ function GalleryItem({ image, index }: { image: (typeof galleryImages)[0]; index
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 z-50 flex items-center justify-center p-6"
-            style={{ background: "rgba(41,35,31,0.95)" }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+            style={{ background: "rgba(25,20,18,0.95)", backdropFilter: "blur(8px)" }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
           >
             <motion.div
-              className="max-w-2xl w-full"
-              initial={{ scale: 0.9 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.9 }}
+              className="max-w-3xl w-full bg-[#3a1518] rounded-sm overflow-hidden shadow-2xl p-4 md:p-6"
+              style={{ border: "1px solid rgba(196,154,82,0.5)" }}
+              initial={{ scale: 0.92, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.92, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
             >
               <div
-                className="aspect-[4/3] flex items-center justify-center"
+                className="relative aspect-[4/3] w-full overflow-hidden rounded-sm"
                 style={{
-                  background: "rgba(100,30,36,0.3)",
-                  border: "1px solid rgba(196,154,82,0.4)",
+                  background: "rgba(20,10,12,0.8)",
+                  border: "1px solid rgba(196,154,82,0.3)",
                 }}
               >
-                <span
-                  className="text-xs"
-                  style={{ color: "rgba(196,154,82,0.6)" }}
-                >
-                  {image.alt}
-                </span>
+                {isRealImage ? (
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 1024px) 100vw, 900px"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center">
+                    <span className="text-3xl mb-3" style={{ color: "#C49A52" }}>✦</span>
+                    <span
+                      className="text-sm font-serif"
+                      style={{ color: "rgba(196,154,82,0.8)" }}
+                    >
+                      {image.alt}
+                    </span>
+                  </div>
+                )}
               </div>
-              <div className="mt-4 flex items-start justify-between">
+              <div className="mt-4 flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-sm" style={{ color: "#F7F0E4" }}>
+                  <p className="text-sm md:text-base font-serif" style={{ color: "#F7F0E4" }}>
                     {image.caption}
                   </p>
-                  {image.year && (
-                    <p className="text-xs mt-1" style={{ color: "#C49A52" }}>
-                      {image.year}
-                    </p>
-                  )}
+                  <p className="text-xs mt-1" style={{ color: "#C49A52" }}>
+                    {image.alt}
+                  </p>
                 </div>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="text-xs tracking-widest uppercase"
-                  style={{ color: "#C49A52" }}
+                  className="text-xs tracking-widest uppercase px-3 py-1.5 border hover:bg-[#641E24] transition-colors"
+                  style={{ color: "#C49A52", borderColor: "rgba(196,154,82,0.5)" }}
                 >
-                  Close
+                  Close &times;
                 </button>
               </div>
             </motion.div>

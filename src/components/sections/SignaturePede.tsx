@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { products, productCategories } from "@/data/products";
 
 function ProductCard({ product }: { product: (typeof products)[0] }) {
@@ -18,24 +19,15 @@ function ProductCard({ product }: { product: (typeof products)[0] }) {
     >
       {/* Image area */}
       <div
-        className="relative aspect-square overflow-hidden mb-5"
-        style={{ background: "rgba(71,25,29,0.08)", border: "1px solid rgba(196,154,82,0.2)" }}
+        className="relative aspect-square overflow-hidden mb-5 rounded-lg border border-[#C49A52]/30 shadow-md bg-[#47191D]/10"
       >
-        {/* Placeholder – replace with next/image when real photos available */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <div
-            className="w-16 h-16 rounded-full border flex items-center justify-center mb-3"
-            style={{ borderColor: "rgba(196,154,82,0.4)" }}
-          >
-            <span style={{ color: "#C49A52", fontSize: "1.5rem" }}>◆</span>
-          </div>
-          <span
-            className="text-xs text-center px-6"
-            style={{ color: "rgba(196,154,82,0.5)" }}
-          >
-            [PRODUCT PHOTO]
-          </span>
-        </div>
+        <Image
+          src={product.imageUrl}
+          alt={product.imageAlt}
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-108"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
 
         {/* Featured badge */}
         {product.featured && (

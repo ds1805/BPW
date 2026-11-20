@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 
 const craftSteps = [
@@ -189,33 +190,32 @@ export default function TheArt() {
             transition={{ duration: 0.8 }}
           >
             <div
-              className="relative aspect-square overflow-hidden"
+              className="relative aspect-square overflow-hidden rounded-sm shadow-2xl"
               style={{
-                background: "rgba(100,30,36,0.3)",
-                border: "1px solid rgba(196,154,82,0.3)",
+                border: "1px solid rgba(196,154,82,0.4)",
               }}
             >
+              <Image
+                src="/images/the-craft-pede.jpg"
+                alt="Traditional Pede Making Craft - Bhaiji Pede Wale Churu"
+                fill
+                className="object-cover transition-transform duration-700 hover:scale-105"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
               <div
-                className="absolute inset-6 border opacity-20"
+                className="absolute inset-4 border opacity-30 pointer-events-none"
                 style={{ borderColor: "#C49A52" }}
               />
-              <div className="absolute inset-0 flex flex-col items-center justify-center gap-4">
-                <div
-                  className="w-20 h-20 rounded-full border-2 flex items-center justify-center"
-                  style={{ borderColor: "rgba(196,154,82,0.4)" }}
-                >
-                  <span style={{ color: "#C49A52", fontSize: "2rem" }}>◆</span>
-                </div>
-                <span
-                  className="text-xs tracking-widest text-center px-8"
-                  style={{ color: "rgba(196,154,82,0.5)" }}
-                >
-                  [AUTHENTIC PEDE / CRAFT PHOTOGRAPH]
-                  <br />
-                  <span className="text-[0.6rem] block mt-1">
-                    Replace with actual photography of the Pede-making process
-                  </span>
-                </span>
+              <div
+                className="absolute bottom-0 inset-x-0 p-4 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(71,25,29,0.85) 0%, transparent 100%)",
+                }}
+              >
+                <p className="text-[11px] tracking-widest uppercase font-serif" style={{ color: "#D8B98C" }}>
+                  The Living Heritage &bull; Handcrafted Daily
+                </p>
               </div>
             </div>
 

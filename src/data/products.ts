@@ -48,8 +48,8 @@ export const products: Product[] = [
       "Our signature plain Pede is what Bhaiji Pede Wale has been known for across generations. Made with traditional methods and the finest ingredients, each piece carries the warmth of Churu and the pride of a family's lifetime of dedication. [DETAILED DESCRIPTION TO BE UPDATED]",
     category: "signature",
     tags: ["signature", "traditional", "classic"],
-    imageUrl: "/images/placeholder/product-plain-pede.jpg",
-    imageAlt: "Classic Plain Pede by Bhaiji Pede Wale",
+    imageUrl: "/images/products/classic-plain-pede.jpg",
+    imageAlt: "Authentic Classic Plain Pede in traditional brass bowl by Bhaiji Pede Wale",
     variants: [
       { id: "plain-250", name: "250g", weight: "250g", available: true },
       { id: "plain-500", name: "500g", weight: "500g", available: true },
@@ -70,8 +70,8 @@ export const products: Product[] = [
       "Our Kesar Pede brings the luxurious flavour of authentic saffron to our traditional Pede recipe. Crafted for special occasions and celebrations. [DETAILED DESCRIPTION TO BE UPDATED]",
     category: "signature",
     tags: ["kesar", "saffron", "festive"],
-    imageUrl: "/images/placeholder/product-kesar-pede.jpg",
-    imageAlt: "Kesar Pede by Bhaiji Pede Wale",
+    imageUrl: "/images/products/kesar-pede.jpg",
+    imageAlt: "Authentic Kesar Pede with saffron and pistachios by Bhaiji Pede Wale",
     variants: [
       { id: "kesar-250", name: "250g", weight: "250g", available: true },
       { id: "kesar-500", name: "500g", weight: "500g", available: true },
@@ -91,8 +91,8 @@ export const products: Product[] = [
       "An elegantly presented assortment of our finest Pede, crafted for gifting on special occasions. Weddings, festivals, celebrations — carry the taste of Bhaiji Pede Wale as your most meaningful gift. [DETAILED DESCRIPTION TO BE UPDATED]",
     category: "gifting",
     tags: ["gift", "assorted", "festive", "occasion"],
-    imageUrl: "/images/placeholder/product-gift-box.jpg",
-    imageAlt: "Special Gift Box by Bhaiji Pede Wale",
+    imageUrl: "/images/products/special-gift-box.jpg",
+    imageAlt: "Royal Shekhawati Heritage Gift Box by Bhaiji Pede Wale",
     variants: [
       {
         id: "gift-500",

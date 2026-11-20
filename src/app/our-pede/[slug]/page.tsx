@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import { products } from "@/data/products";
 import ClosingStatement from "@/components/sections/ClosingStatement";
 import Link from "next/link";
@@ -48,30 +49,16 @@ export default async function ProductDetailPage({ params }: Props) {
           <div className="grid md:grid-cols-2 gap-16 items-start">
             {/* Product image */}
             <div
-              className="relative aspect-square"
-              style={{
-                background: "rgba(71,25,29,0.08)",
-                border: "1px solid rgba(196,154,82,0.3)",
-              }}
+              className="relative aspect-square overflow-hidden rounded-xl border-2 border-[#C49A52]/40 shadow-xl bg-[#47191D]/10"
             >
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <div
-                  className="w-20 h-20 rounded-full border-2 flex items-center justify-center mb-4"
-                  style={{ borderColor: "rgba(196,154,82,0.4)" }}
-                >
-                  <span style={{ color: "#C49A52", fontSize: "2rem" }}>◆</span>
-                </div>
-                <span
-                  className="text-xs text-center px-6"
-                  style={{ color: "rgba(196,154,82,0.5)" }}
-                >
-                  {product.imageAlt}
-                  <br />
-                  <span className="text-[0.6rem] block mt-2">
-                    Replace with actual product photograph
-                  </span>
-                </span>
-              </div>
+              <Image
+                src={product.imageUrl}
+                alt={product.imageAlt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+              />
             </div>
 
             {/* Product info */}
