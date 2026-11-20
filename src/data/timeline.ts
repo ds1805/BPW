@@ -1,5 +1,6 @@
 // Timeline milestones – fill with verified family history
 export interface TimelineMilestone {
+  id: string;
   year: string;
   title: string;
   description: string;
@@ -9,6 +10,7 @@ export interface TimelineMilestone {
 
 export const timeline: TimelineMilestone[] = [
   {
+    id: "milestone-1948",
     year: "1948",
     title: "The Beginning",
     description:
@@ -17,7 +19,8 @@ export const timeline: TimelineMilestone[] = [
     imageAlt: "The original Bhaiji Pede Wale shop circa 1948",
   },
   {
-    year: "[YEAR]",
+    id: "milestone-growth",
+    year: "1960s",
     title: "Growing Reputation",
     description:
       "[MILESTONE DESCRIPTION – TO BE UPDATED BY FAMILY]",
@@ -25,7 +28,8 @@ export const timeline: TimelineMilestone[] = [
     imageAlt: "Shop milestone",
   },
   {
-    year: "[YEAR]",
+    id: "milestone-gen2",
+    year: "1980s",
     title: "A Second Generation",
     description:
       "[DESCRIPTION OF SECOND GENERATION JOINING THE BUSINESS – TO BE UPDATED]",
@@ -33,7 +37,8 @@ export const timeline: TimelineMilestone[] = [
     imageAlt: "Second generation",
   },
   {
-    year: "[YEAR]",
+    id: "milestone-recognition",
+    year: "2000s",
     title: "Churu Becomes Proud",
     description:
       "[MILESTONE – TO BE UPDATED. Example: Recognition by the community, featured in local media, etc.]",
@@ -41,6 +46,7 @@ export const timeline: TimelineMilestone[] = [
     imageAlt: "Community recognition",
   },
   {
+    id: "milestone-today",
     year: "Today",
     title: "A Living Legacy",
     description:

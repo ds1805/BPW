@@ -182,6 +182,8 @@ export default function Hero() {
         alignItems: "center",
         justifyContent: "center",
         backgroundColor: "#29231F",
+        paddingTop: "110px",
+        paddingBottom: "60px",
       }}
     >
       {/* Background with parallax */}
@@ -191,7 +193,7 @@ export default function Hero() {
 
       {/* Content */}
       <motion.div
-        className="relative z-10 flex flex-col items-center text-center px-4 sm:px-8 max-w-5xl mx-auto"
+        className="relative z-10 flex flex-col items-center text-center px-4 sm:px-8 max-w-5xl mx-auto w-full"
         style={{ opacity }}
       >
         {/* Pre-heading ornament and brand emblem */}
@@ -199,17 +201,17 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mb-6 flex flex-col items-center"
+          className="mb-4 flex flex-col items-center"
         >
           <div
-            className="rounded-full overflow-hidden border-2 border-[#C49A52] bg-white p-1 shadow-2xl mb-4 flex items-center justify-center flex-shrink-0"
-            style={{ width: "112px", height: "112px" }}
+            className="rounded-full overflow-hidden border-2 border-[#C49A52] bg-white p-1 shadow-2xl mb-3 flex items-center justify-center flex-shrink-0"
+            style={{ width: "84px", height: "84px" }}
           >
             <Image
               src="/images/bpw-logo.jpg"
               alt="Bhaiji Pede Wale Churu Logo"
-              width={104}
-              height={104}
+              width={76}
+              height={76}
               className="rounded-full object-contain"
               priority
             />

@@ -35,22 +35,119 @@ export const testimonials: Testimonial[] = [
   },
 ];
 
-// Routes that represent cities where customers have carried BPW Pede
-// These are illustrative – update with actual customer-shared destinations
-export const travelRoutes = [
-  { city: "Delhi", lat: 28.6139, lng: 77.209, label: "Delhi" },
-  { city: "Jaipur", lat: 26.9124, lng: 75.7873, label: "Jaipur" },
-  { city: "Mumbai", lat: 19.076, lng: 72.8777, label: "Mumbai" },
-  { city: "Kolkata", lat: 22.5726, lng: 88.3639, label: "Kolkata" },
-  { city: "Ahmedabad", lat: 23.0225, lng: 72.5714, label: "Ahmedabad" },
-  { city: "Jodhpur", lat: 26.2389, lng: 73.0243, label: "Jodhpur" },
-  { city: "Bikaner", lat: 28.0229, lng: 73.3119, label: "Bikaner" },
-  { city: "Pune", lat: 18.5204, lng: 73.8567, label: "Pune" },
-  { city: "Hyderabad", lat: 17.385, lng: 78.4867, label: "Hyderabad" },
-  { city: "Bengaluru", lat: 12.9716, lng: 77.5946, label: "Bengaluru" },
-  { city: "Chennai", lat: 13.0827, lng: 80.2707, label: "Chennai" },
-  { city: "Lucknow", lat: 26.8467, lng: 80.9462, label: "Lucknow" },
-];
+export interface TravelRoute {
+  city: string;
+  label: string;
+  x: number;
+  y: number;
+  distance: string;
+  story: string;
+}
 
-// Churu origin coordinates
-export const churuOrigin = { lat: 28.2957, lng: 74.9517 };
+export const churuOrigin = {
+  city: "Churu",
+  label: "Churu (Origin)",
+  x: 158,
+  y: 208,
+  state: "Rajasthan",
+};
+
+// Accurately positioned coordinates on the 612x696 official India SVG map
+export const travelRoutes: TravelRoute[] = [
+  {
+    city: "Delhi",
+    label: "Delhi",
+    x: 186,
+    y: 210,
+    distance: "280 km",
+    story: "Hand-carried by commuters and family visitors who never return from Churu without a box.",
+  },
+  {
+    city: "Jaipur",
+    label: "Jaipur",
+    x: 168,
+    y: 250,
+    distance: "205 km",
+    story: "A cherished gift carried to the Pink City for festivals, relatives, and celebrations.",
+  },
+  {
+    city: "Bikaner",
+    label: "Bikaner",
+    x: 124,
+    y: 215,
+    distance: "175 km",
+    story: "Sharing the legendary taste across neighbouring desert cities.",
+  },
+  {
+    city: "Jodhpur",
+    label: "Jodhpur",
+    x: 114,
+    y: 270,
+    distance: "340 km",
+    story: "Carried across Marwar for weddings and traditional family occasions.",
+  },
+  {
+    city: "Mumbai",
+    label: "Mumbai",
+    x: 115,
+    y: 432,
+    distance: "1,220 km",
+    story: "Packed in luggage on trains and flights to connect families across Maharashtra.",
+  },
+  {
+    city: "Kolkata",
+    label: "Kolkata",
+    x: 395,
+    y: 330,
+    distance: "1,480 km",
+    story: "A deep cultural bond connecting Shekhawati diaspora families to their roots.",
+  },
+  {
+    city: "Ahmedabad",
+    label: "Ahmedabad",
+    x: 95,
+    y: 345,
+    distance: "740 km",
+    story: "Carried to Gujarat through business journeys and loved ones.",
+  },
+  {
+    city: "Pune",
+    label: "Pune",
+    x: 135,
+    y: 448,
+    distance: "1,290 km",
+    story: "Brought by students and young professionals returning after visiting home in Churu.",
+  },
+  {
+    city: "Hyderabad",
+    label: "Hyderabad",
+    x: 236,
+    y: 462,
+    distance: "1,450 km",
+    story: "Treasured across the Deccan plateau as an authentic taste of Rajasthan.",
+  },
+  {
+    city: "Bengaluru",
+    label: "Bengaluru",
+    x: 186,
+    y: 546,
+    distance: "1,920 km",
+    story: "Hand-carried across thousands of kilometres to bring nostalgia to tech corridors.",
+  },
+  {
+    city: "Chennai",
+    label: "Chennai",
+    x: 242,
+    y: 552,
+    distance: "2,080 km",
+    story: "Reaching the southern coast solely through the affection and pride of our visitors.",
+  },
+  {
+    city: "Lucknow",
+    label: "Lucknow",
+    x: 265,
+    y: 242,
+    distance: "620 km",
+    story: "Welcomed into the city of Nawabs as Rajasthan's premier traditional sweet.",
+  },
+];

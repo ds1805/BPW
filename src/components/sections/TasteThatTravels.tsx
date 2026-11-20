@@ -2,165 +2,250 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { travelRoutes, churuOrigin } from "@/data/testimonials";
+import IndiaMapData from "@svg-maps/india";
+import { travelRoutes, churuOrigin, TravelRoute } from "@/data/testimonials";
 
-// SVG India Map paths (simplified outline)
-// The map is a simplified representation for illustrative purposes
 function IndiaMapSVG({
-  animatedCities,
+  activeCity,
+  onSelectCity,
 }: {
-  animatedCities: typeof travelRoutes;
+  activeCity: TravelRoute;
+  onSelectCity: (city: TravelRoute) => void;
 }) {
-  // Convert geo coordinates to SVG viewBox coordinates
-  // India bounding box: ~68°E to 97°E, ~8°N to 37°N
-  const geoToSVG = (lat: number, lng: number) => {
-    const svgWidth = 400;
-    const svgHeight = 480;
-    const minLng = 68;
-    const maxLng = 97.5;
-    const minLat = 7;
-    const maxLat = 37.5;
-
-    const x = ((lng - minLng) / (maxLng - minLng)) * svgWidth;
-    const y = svgHeight - ((lat - minLat) / (maxLat - minLat)) * svgHeight;
-    return { x, y };
+  const mapData = IndiaMapData as {
+    viewBox?: string;
+    locations: { id: string; name: string; path: string }[];
   };
 
-  const churuSVG = geoToSVG(churuOrigin.lat, churuOrigin.lng);
+  const churu = churuOrigin;
 
   return (
-    <svg
-      viewBox="0 0 400 480"
-      className="w-full max-w-sm"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      {/* India outline – simplified polygon approximation */}
-      <path
-        d="M 155 20 L 175 18 L 200 22 L 230 25 L 255 30 L 275 45 L 285 60 L 290 80 L 295 100 L 300 120 L 310 140 L 320 155 L 325 175 L 320 195 L 310 210 L 305 225 L 310 240 L 305 260 L 295 275 L 285 285 L 280 300 L 270 320 L 260 335 L 250 350 L 240 365 L 230 380 L 225 400 L 220 420 L 215 445 L 210 460 L 205 465 L 198 460 L 192 450 L 185 435 L 178 415 L 170 395 L 160 380 L 148 362 L 138 345 L 125 330 L 110 318 L 100 305 L 90 290 L 82 275 L 78 258 L 75 240 L 72 222 L 70 205 L 68 190 L 66 175 L 65 160 L 68 145 L 72 132 L 78 118 L 84 102 L 92 88 L 100 75 L 110 62 L 120 50 L 132 38 L 143 28 Z"
-        stroke="rgba(196,154,82,0.4)"
-        strokeWidth="1.5"
-        fill="rgba(100,30,36,0.08)"
-      />
-
-      {/* Animated lines from Churu to cities */}
-      {animatedCities.map((city, i) => {
-        const citySVG = geoToSVG(city.lat, city.lng);
-        return (
-          <motion.line
-            key={city.city}
-            x1={churuSVG.x}
-            y1={churuSVG.y}
-            x2={citySVG.x}
-            y2={citySVG.y}
-            stroke="#C49A52"
-            strokeWidth="0.8"
-            strokeDasharray="4 4"
-            strokeOpacity="0.5"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ delay: 0.5 + i * 0.15, duration: 0.8 }}
-          />
-        );
-      })}
-
-      {/* City dots */}
-      {animatedCities.map((city, i) => {
-        const citySVG = geoToSVG(city.lat, city.lng);
-        return (
-          <motion.g key={`dot-${city.city}`}>
-            <motion.circle
-              cx={citySVG.x}
-              cy={citySVG.y}
-              r="4"
-              fill="#C49A52"
-              opacity="0.6"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.6 }}
-              transition={{ delay: 1.2 + i * 0.15, duration: 0.4 }}
-            />
-            <motion.circle
-              cx={citySVG.x}
-              cy={citySVG.y}
-              r="8"
-              stroke="#C49A52"
-              strokeWidth="0.5"
-              fill="none"
-              opacity="0.3"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: [0, 1.5, 1], opacity: [0, 0.3, 0.3] }}
-              transition={{ delay: 1.4 + i * 0.15, duration: 0.6 }}
-            />
-          </motion.g>
-        );
-      })}
-
-      {/* Churu origin dot – larger and more prominent */}
-      <motion.circle
-        cx={churuSVG.x}
-        cy={churuSVG.y}
-        r="6"
-        fill="#C49A52"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 0.2, duration: 0.5 }}
-      />
-      <motion.circle
-        cx={churuSVG.x}
-        cy={churuSVG.y}
-        r="14"
-        stroke="#C49A52"
-        strokeWidth="1"
+    <div className="relative w-full max-w-lg mx-auto">
+      <svg
+        viewBox={mapData.viewBox || "0 0 612 696"}
+        className="w-full h-auto drop-shadow-xl"
         fill="none"
-        animate={{ r: [10, 18, 10], opacity: [0.5, 0.1, 0.5] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-      />
-      <motion.text
-        x={churuSVG.x + 10}
-        y={churuSVG.y - 10}
-        fontSize="9"
-        fill="#C49A52"
-        fontFamily="serif"
-        fontWeight="600"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
+        xmlns="http://www.w3.org/2000/svg"
       >
-        Churu
-      </motion.text>
-    </svg>
+        <defs>
+          <linearGradient id="routeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#C49A52" stopOpacity="0.9" />
+            <stop offset="100%" stopColor="#f5d78e" stopOpacity="0.4" />
+          </linearGradient>
+          <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="glow" />
+            <feComposite in="SourceGraphic" in2="glow" operator="over" />
+          </filter>
+        </defs>
+
+        {/* All States of India from official cartography */}
+        <g id="india-states">
+          {mapData.locations.map((loc) => {
+            const isRajasthan = loc.name === "Rajasthan";
+            return (
+              <path
+                key={loc.id}
+                id={loc.id}
+                d={loc.path}
+                fill={
+                  isRajasthan
+                    ? "rgba(196, 154, 82, 0.2)"
+                    : "rgba(71, 25, 29, 0.05)"
+                }
+                stroke={
+                  isRajasthan
+                    ? "#C49A52"
+                    : "rgba(196, 154, 82, 0.35)"
+                }
+                strokeWidth={isRajasthan ? "1.4" : "0.6"}
+                strokeLinejoin="round"
+                className="transition-colors duration-300"
+              />
+            );
+          })}
+        </g>
+
+        {/* Flight & Travel Route Arcs from Churu */}
+        <g id="travel-routes">
+          {travelRoutes.map((route, i) => {
+            const isSelected = activeCity.city === route.city;
+            // Quadratic curve control point with natural upward bow
+            const midX = (churu.x + route.x) / 2;
+            const midY = (churu.y + route.y) / 2;
+            const dx = route.x - churu.x;
+            const dy = route.y - churu.y;
+            // Curvature offset perpendicular to line
+            const offset = Math.min(Math.sqrt(dx * dx + dy * dy) * 0.15, 45);
+            const ctrlX = midX - (dy / Math.max(Math.abs(dx) + Math.abs(dy), 1)) * offset;
+            const ctrlY = midY + (dx / Math.max(Math.abs(dx) + Math.abs(dy), 1)) * offset;
+
+            const pathD = `M ${churu.x} ${churu.y} Q ${ctrlX} ${ctrlY} ${route.x} ${route.y}`;
+
+            return (
+              <g key={route.city}>
+                {/* Background faint arc */}
+                <path
+                  d={pathD}
+                  stroke="rgba(196, 154, 82, 0.25)"
+                  strokeWidth="0.8"
+                  fill="none"
+                />
+
+                {/* Animated active golden travel line */}
+                <motion.path
+                  d={pathD}
+                  stroke={isSelected ? "#C49A52" : "rgba(196, 154, 82, 0.6)"}
+                  strokeWidth={isSelected ? "2" : "1"}
+                  strokeDasharray={isSelected ? "4 3" : "2 4"}
+                  fill="none"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{
+                    delay: 0.3 + i * 0.08,
+                    duration: 1.2,
+                    ease: "easeOut",
+                  }}
+                />
+              </g>
+            );
+          })}
+        </g>
+
+        {/* Destination City Dots & Markers */}
+        <g id="city-markers">
+          {travelRoutes.map((route) => {
+            const isSelected = activeCity.city === route.city;
+            return (
+              <g
+                key={`marker-${route.city}`}
+                onClick={() => onSelectCity(route)}
+                className="cursor-pointer group"
+              >
+                {/* Click target area */}
+                <circle cx={route.x} cy={route.y} r="14" fill="transparent" />
+
+                {/* Pulse ring for active city */}
+                {isSelected && (
+                  <motion.circle
+                    cx={route.x}
+                    cy={route.y}
+                    r="8"
+                    stroke="#C49A52"
+                    strokeWidth="1.5"
+                    fill="none"
+                    animate={{ r: [6, 16, 6], opacity: [0.8, 0.1, 0.8] }}
+                    transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                  />
+                )}
+
+                {/* City node */}
+                <circle
+                  cx={route.x}
+                  cy={route.y}
+                  r={isSelected ? 5 : 3.5}
+                  fill={isSelected ? "#47191D" : "#C49A52"}
+                  stroke="#C49A52"
+                  strokeWidth={isSelected ? "2" : "1"}
+                  filter={isSelected ? "url(#goldGlow)" : undefined}
+                />
+
+                {/* City label text */}
+                <text
+                  x={route.x + (route.x > 300 ? -8 : 8)}
+                  y={route.y + (route.y > 450 ? 3 : -6)}
+                  textAnchor={route.x > 300 ? "end" : "start"}
+                  fontSize={isSelected ? "11" : "9"}
+                  fontWeight={isSelected ? "700" : "500"}
+                  fill={isSelected ? "#47191D" : "#641E24"}
+                  fontFamily="'Inter', system-ui, sans-serif"
+                  className="transition-all duration-200 select-none"
+                  style={{
+                    textShadow: "0 1px 3px rgba(247, 240, 228, 0.9)",
+                  }}
+                >
+                  {route.label}
+                </text>
+              </g>
+            );
+          })}
+        </g>
+
+        {/* Churu (Origin) Beacon */}
+        <g id="churu-origin">
+          {/* Outer glow ring */}
+          <motion.circle
+            cx={churu.x}
+            cy={churu.y}
+            r="12"
+            stroke="#C49A52"
+            strokeWidth="1.5"
+            fill="none"
+            animate={{ r: [10, 20, 10], opacity: [0.9, 0.2, 0.9] }}
+            transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          {/* Central gold point */}
+          <circle
+            cx={churu.x}
+            cy={churu.y}
+            r="6.5"
+            fill="#C49A52"
+            stroke="#47191D"
+            strokeWidth="1.5"
+            filter="url(#goldGlow)"
+          />
+
+          {/* Center heart */}
+          <circle cx={churu.x} cy={churu.y} r="2.5" fill="#47191D" />
+
+          {/* Churu Label with badge */}
+          <g transform={`translate(${churu.x - 48}, ${churu.y - 30})`}>
+            <rect
+              width="96"
+              height="20"
+              rx="4"
+              fill="#47191D"
+              stroke="#C49A52"
+              strokeWidth="1"
+            />
+            <text
+              x="48"
+              y="13"
+              textAnchor="middle"
+              fontSize="9"
+              fontWeight="700"
+              fill="#F7F0E4"
+              fontFamily="'Playfair Display', serif"
+              letterSpacing="0.05em"
+            >
+              ★ CHURU (Origin)
+            </text>
+          </g>
+        </g>
+      </svg>
+    </div>
   );
 }
 
 export default function TasteThatTravels() {
   const headerRef = useRef(null);
   const isHeaderInView = useInView(headerRef, { once: true });
-  const mapRef = useRef(null);
-  const isMapInView = useInView(mapRef, { once: true, margin: "-100px" });
-  const [animatedCities, setAnimatedCities] = useState<typeof travelRoutes>([]);
-  const [currentCityIndex, setCurrentCityIndex] = useState(0);
+  const [activeCity, setActiveCity] = useState<TravelRoute>(travelRoutes[0]);
+  const [isPaused, setIsPaused] = useState(false);
 
+  // Auto-cycle through cities every 3.5s unless user is interacting
   useEffect(() => {
-    if (!isMapInView) return;
-    const timer = setInterval(() => {
-      setAnimatedCities((prev) => {
-        if (prev.length < travelRoutes.length) {
-          return [...prev, travelRoutes[prev.length]];
-        }
-        clearInterval(timer);
-        return prev;
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setActiveCity((prev) => {
+        const idx = travelRoutes.findIndex((r) => r.city === prev.city);
+        const nextIdx = (idx + 1) % travelRoutes.length;
+        return travelRoutes[nextIdx];
       });
-    }, 200);
-    return () => clearInterval(timer);
-  }, [isMapInView]);
+    }, 3500);
 
-  useEffect(() => {
-    if (travelRoutes.length === 0) return;
-    const timer = setInterval(() => {
-      setCurrentCityIndex((prev) => (prev + 1) % travelRoutes.length);
-    }, 2000);
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(interval);
+  }, [isPaused]);
 
   return (
     <section
@@ -181,7 +266,7 @@ export default function TasteThatTravels() {
         {/* Section header */}
         <motion.div
           ref={headerRef}
-          className="text-center mb-20"
+          className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isHeaderInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -202,9 +287,10 @@ export default function TasteThatTravels() {
           >
             Churu Is Where It Begins.
             <br />
-            <em>India Is Where It Travels.</em>
+            <em style={{ color: "#A65F42" }}>India Is Where It Travels.</em>
           </h2>
-          <div className="flex items-center gap-6 justify-center my-8">
+
+          <div className="flex items-center gap-6 justify-center my-6">
             <div
               className="flex-1 max-w-24 h-px"
               style={{
@@ -221,128 +307,180 @@ export default function TasteThatTravels() {
               }}
             />
           </div>
+
           <p
             className="text-base leading-relaxed max-w-2xl mx-auto"
-            style={{ color: "#29231F", opacity: 0.75 }}
+            style={{ color: "#29231F", opacity: 0.8 }}
           >
-            No delivery vans. No courier boxes. Just people — travellers,
-            homecomers, and loyal customers — who carry Bhaiji Pede Wale&apos;s
-            Pede as gifts for their families, their friends, and everyone they
-            love. This is how a small shop in Churu reached the hearts of
-            people across India.
+            Bhaiji Pede Wale doesn&apos;t run commercial delivery fleets. Our sweets
+            travel the country the old-fashioned way: hand-carried by travellers,
+            relatives, and homecomers as an affectionate taste of Churu.
           </p>
         </motion.div>
 
-        {/* Map + Story layout */}
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-          {/* Map */}
-          <motion.div
-            ref={mapRef}
-            className="flex justify-center"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isMapInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8 }}
+        {/* Map + Interactive Story Grid */}
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+          {/* Left: Official Cartographic India Map (7 cols) */}
+          <div
+            className="lg:col-span-7 bg-[#FBF7F0] p-6 rounded-2xl border border-[#C49A52]/30 shadow-lg relative overflow-hidden"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="relative">
-              <IndiaMapSVG animatedCities={animatedCities} />
+            {/* Legend / Origin info */}
+            <div className="flex items-center justify-between mb-4 pb-3 border-b border-[#C49A52]/20">
+              <div className="flex items-center gap-2">
+                <span className="w-3 h-3 rounded-full bg-[#C49A52] inline-block shadow-sm" />
+                <span className="text-xs font-serif font-semibold text-[#47191D]">
+                  Rajasthan & Churu (Origin)
+                </span>
+              </div>
+              <span className="text-[11px] text-[#A65F42] uppercase tracking-wider">
+                Click any city to view route
+              </span>
+            </div>
 
-              {/* Animated city name display */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentCityIndex}
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 text-center"
-                  initial={{ opacity: 0, y: 5 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -5 }}
-                  transition={{ duration: 0.5 }}
-                >
+            {/* Official Map */}
+            <IndiaMapSVG
+              activeCity={activeCity}
+              onSelectCity={(city) => {
+                setActiveCity(city);
+                setIsPaused(true);
+              }}
+            />
+
+            {/* City Selector Chips */}
+            <div className="mt-4 pt-4 border-t border-[#C49A52]/20 flex flex-wrap gap-1.5 justify-center">
+              {travelRoutes.map((route) => {
+                const isSelected = activeCity.city === route.city;
+                return (
+                  <button
+                    key={route.city}
+                    onClick={() => {
+                      setActiveCity(route);
+                      setIsPaused(true);
+                    }}
+                    className={`px-2.5 py-1 text-xs rounded-full transition-all duration-200 cursor-pointer ${
+                      isSelected
+                        ? "bg-[#47191D] text-[#F7F0E4] font-medium shadow-sm scale-105"
+                        : "bg-[#F7F0E4] text-[#29231F] hover:bg-[#C49A52]/20 border border-[#C49A52]/30"
+                    }`}
+                  >
+                    {route.city}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Right: Active Route Details & Story Cards (5 cols) */}
+          <div className="lg:col-span-5 space-y-6">
+            {/* Active City Spotlight Card */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeCity.city}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+                className="p-6 rounded-xl border border-[#C49A52] relative overflow-hidden"
+                style={{
+                  background:
+                    "linear-gradient(135deg, rgba(71, 25, 29, 0.95), rgba(100, 30, 36, 0.92))",
+                  boxShadow: "0 10px 25px -5px rgba(71, 25, 29, 0.3)",
+                }}
+              >
+                <div className="flex items-center justify-between mb-3">
                   <span
-                    className="text-xs tracking-widest uppercase"
+                    className="text-xs uppercase tracking-widest font-semibold"
                     style={{ color: "#C49A52" }}
                   >
-                    {travelRoutes[currentCityIndex]?.label}
+                    Active Route
                   </span>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-          </motion.div>
+                  <span
+                    className="text-xs px-2.5 py-0.5 rounded-full"
+                    style={{
+                      background: "rgba(196, 154, 82, 0.2)",
+                      color: "#f5d78e",
+                      border: "1px solid rgba(196, 154, 82, 0.4)",
+                    }}
+                  >
+                    {activeCity.distance} from Churu
+                  </span>
+                </div>
 
-          {/* Story text */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className="space-y-8">
-              {/* Story cards */}
-              {[
-                {
-                  title: "The Traveller's Gift",
-                  text: "Every person who leaves Churu for another city knows exactly what to bring back home. A box from Bhaiji Pede Wale. It has become the most meaningful gift from this city — the one that says 'I remembered you, and I brought the best Churu has to offer.'",
-                },
-                {
-                  title: "Carried, Not Shipped",
-                  text: "These Pede have never been marketed beyond Churu. They have travelled through the hands and hearts of people who wanted to share something extraordinary. That is a kind of reputation that money cannot buy.",
-                },
-                {
-                  title: "A Taste That Waits for You",
-                  text: "Ask anyone who has lived in Churu and moved away. They will tell you: the moment they return, one of the first things they do is visit Bhaiji Pede Wale. Some memories are made of tastes.",
-                },
-              ].map((card, i) => (
-                <motion.div
-                  key={card.title}
-                  className="p-5 relative"
-                  style={{
-                    background: "rgba(71,25,29,0.04)",
-                    borderLeft: "2px solid rgba(196,154,82,0.5)",
-                  }}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.15, duration: 0.6 }}
+                <h3
+                  className="font-serif text-2xl font-bold mb-2 flex items-center gap-2"
+                  style={{ color: "#F7F0E4" }}
                 >
-                  <h3
-                    className="font-serif text-lg mb-2"
-                    style={{ color: "#47191D" }}
-                  >
-                    {card.title}
-                  </h3>
-                  <p
-                    className="text-sm leading-relaxed"
-                    style={{ color: "#29231F", opacity: 0.75 }}
-                  >
-                    {card.text}
-                  </p>
-                </motion.div>
-              ))}
+                  <span>Churu</span>
+                  <span style={{ color: "#C49A52" }}>➔</span>
+                  <span>{activeCity.label}</span>
+                </h3>
+
+                <p
+                  className="text-sm leading-relaxed"
+                  style={{ color: "rgba(247, 240, 228, 0.85)" }}
+                >
+                  {activeCity.story}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Narrative Pillars */}
+            <div className="space-y-4">
+              <div
+                className="p-4 rounded-lg"
+                style={{
+                  background: "rgba(71, 25, 29, 0.04)",
+                  borderLeft: "3px solid #C49A52",
+                }}
+              >
+                <h4 className="font-serif text-base font-semibold mb-1" style={{ color: "#47191D" }}>
+                  The Traveller&apos;s Gift
+                </h4>
+                <p className="text-xs leading-relaxed" style={{ color: "#29231F", opacity: 0.75 }}>
+                  Every visitor leaving Churu carries a box of Bhaiji Pede — the standard gift
+                  carried from Rajasthan to loved ones nationwide.
+                </p>
+              </div>
+
+              <div
+                className="p-4 rounded-lg"
+                style={{
+                  background: "rgba(71, 25, 29, 0.04)",
+                  borderLeft: "3px solid #C49A52",
+                }}
+              >
+                <h4 className="font-serif text-base font-semibold mb-1" style={{ color: "#47191D" }}>
+                  Carried by Trust, Not Shipped
+                </h4>
+                <p className="text-xs leading-relaxed" style={{ color: "#29231F", opacity: 0.75 }}>
+                  We do not operate e-commerce courier shipments. Every box that reaches Mumbai,
+                  Kolkata, or Bengaluru was carried by hand because someone cared enough to bring it.
+                </p>
+              </div>
             </div>
 
-            {/* Note about delivery */}
+            {/* Physical visit reminder */}
             <div
-              className="mt-8 p-4 text-xs leading-relaxed"
+              className="p-4 text-xs rounded-lg"
               style={{
-                background: "rgba(196,154,82,0.08)",
-                border: "1px solid rgba(196,154,82,0.2)",
+                background: "rgba(196, 154, 82, 0.1)",
+                border: "1px solid rgba(196, 154, 82, 0.3)",
                 color: "#29231F",
-                opacity: 0.75,
               }}
             >
-              <span style={{ color: "#C49A52", fontWeight: 600 }}>
-                Note:
-              </span>{" "}
-              Bhaiji Pede Wale currently operates from its shop in Churu,
-              Rajasthan. We do not offer direct nationwide delivery at this time.
-              Please{" "}
+              <strong style={{ color: "#47191D" }}>Visiting Rajasthan?</strong>{" "}
+              Experience our Pede fresh from the shop in Churu.{" "}
               <a
                 href="/visit-us"
-                style={{ color: "#C49A52", textDecoration: "underline" }}
+                className="underline font-semibold hover:opacity-80"
+                style={{ color: "#641E24" }}
               >
-                visit us in Churu
-              </a>{" "}
-              to experience the original.
+                Find our location & directions &rarr;
+              </a>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

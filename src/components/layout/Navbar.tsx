@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { brand } from "@/data/brand";
 
@@ -19,44 +20,46 @@ const navLinks = [
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState("/");
+  const pathname = usePathname();
 
   const handleScroll = useCallback(() => {
-    setIsScrolled(window.scrollY > 60);
+    setIsScrolled(window.scrollY > 20);
   }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
-    setActiveLink(window.location.pathname);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
   return (
     <>
       <motion.header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? "bg-[#47191D] shadow-xl shadow-black/20"
-            : "bg-transparent"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
           zIndex: 50,
-          backgroundColor: isScrolled ? "#47191D" : "transparent",
+          backgroundColor: isScrolled
+            ? "rgba(55, 18, 22, 0.98)"
+            : "rgba(71, 25, 29, 0.95)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1px solid rgba(196, 154, 82, 0.3)",
+          boxShadow: isScrolled
+            ? "0 10px 30px -10px rgba(0, 0, 0, 0.5)"
+            : "0 4px 20px -5px rgba(0, 0, 0, 0.3)",
         }}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        {/* Top ornamental bar */}
+        {/* Top ornamental gold bar */}
         <div
           className="h-[2px]"
           style={{
             background:
-              "linear-gradient(90deg, transparent, #C49A52, #C49A52, transparent)",
+              "linear-gradient(90deg, transparent, #C49A52 20%, #f5d78e 50%, #C49A52 80%, transparent)",
           }}
         />
 
@@ -66,20 +69,20 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-3 group">
               <div
                 className="rounded-full overflow-hidden border-2 border-[#C49A52] bg-white p-0.5 shadow-md transition-transform group-hover:scale-105 flex items-center justify-center flex-shrink-0"
-                style={{ width: "44px", height: "44px" }}
+                style={{ width: "46px", height: "46px" }}
               >
                 <Image
                   src="/images/bpw-logo.jpg"
                   alt="Bhaiji Pede Wale Logo"
-                  width={40}
-                  height={40}
+                  width={42}
+                  height={42}
                   className="rounded-full object-contain"
                   priority
                 />
               </div>
               <div>
                 <p
-                  className="font-serif font-semibold text-sm leading-tight tracking-wide"
+                  className="font-serif font-semibold text-base leading-tight tracking-wide"
                   style={{ color: "#F7F0E4" }}
                 >
                   Bhaiji Pede Wale
@@ -94,32 +97,29 @@ export function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`relative px-4 py-2 text-sm font-medium tracking-wide transition-colors duration-300 group ${
-                    activeLink === link.href
-                      ? "text-gold"
-                      : "text-ivory/80 hover:text-ivory"
-                  }`}
-                  style={{
-                    color:
-                      activeLink === link.href ? "#C49A52" : "rgba(247,240,228,0.8)",
-                  }}
-                  onClick={() => setActiveLink(link.href)}
-                >
-                  {link.label}
-                  <span
-                    className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[1px] transition-all duration-300 group-hover:w-3/4"
+            <nav className="hidden lg:flex items-center gap-2">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="relative px-3 py-2 text-sm font-medium tracking-wide transition-all duration-300 group"
                     style={{
-                      background: "#C49A52",
-                      width: activeLink === link.href ? "75%" : "0",
+                      color: isActive ? "#C49A52" : "rgba(247, 240, 228, 0.9)",
                     }}
-                  />
-                </Link>
-              ))}
+                  >
+                    {link.label}
+                    <span
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] transition-all duration-300 group-hover:w-3/4"
+                      style={{
+                        background: "#C49A52",
+                        width: isActive ? "80%" : "0",
+                      }}
+                    />
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Mobile Menu Button */}
@@ -202,13 +202,12 @@ export function Navbar() {
                       className="block py-3 text-lg font-serif transition-colors duration-200"
                       style={{
                         color:
-                          activeLink === link.href
+                          pathname === link.href
                             ? "#C49A52"
                             : "rgba(247,240,228,0.85)",
                         borderBottom: "1px solid rgba(196,154,82,0.15)",
                       }}
                       onClick={() => {
-                        setActiveLink(link.href);
                         setIsMobileOpen(false);
                       }}
                     >

@@ -381,7 +381,7 @@ export default function Legacy() {
           <div>
             {timeline.map((item, index) => (
               <TimelineItem
-                key={item.year}
+                key={item.id || `${item.year}-${index}`}
                 item={item}
                 index={index}
                 isLast={index === timeline.length - 1}
