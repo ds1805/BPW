@@ -11,7 +11,7 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: "t1",
-    name: "Dheeraj Saraswat",
+    name: "Dheeraj",
     location: "Bhopal, Madhya Pradesh",
     quote:
       "Whenever anyone in our extended family visits Churu or Shekhawati, coming back without Bhaiji's Pede is out of the question. The distinct aroma of slow-roasted pure desi ghee and mawa brings back pure nostalgia. When the box opens in Bhopal, it vanishes within minutes!",
