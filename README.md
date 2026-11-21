@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bhaiji Pede Wale (BPW) — Digital Heritage Platform
+> *"Made in Churu. Carried across India. Remembered everywhere."*
 
-## Getting Started
+An immersive, premium digital heritage website and storytelling platform for **Bhaiji Pede Wale**, the legendary traditional Pede sweets institution based in Churu, Rajasthan, India (Established 1948).
 
-First, run the development server:
+---
+
+## ✦ Overview
+
+This platform is a digital representation of a family's legacy, dedication, and culinary craftsmanship passed through generations. Rather than an ordinary commercial sweets shop, it offers an editorial, royal journey celebrating Shekhawati architecture, Marwari culture, and the organic journey of how Bhaiji's Pede travel across Indian households through the trust of its patrons.
+
+---
+
+## ✦ Key Features
+
+- **Royal Rajasthan Aesthetics**: Tailored palette combining Royal Burgundy (`#47191D`), Deep Maroon (`#641E24`), Desert Sand (`#D8B98C`), Antique Gold (`#C49A52`), and Warm Ivory (`#F7F0E4`).
+- **Interactive "Taste That Travels" India Map**: Cartographically accurate India map built with official state boundaries (`@svg-maps/india`) showcasing connecting paths from Churu to 13+ cities across India (Delhi, Mumbai, Bengaluru, Chennai, Bhopal, Kolkata, Pune, Jaipur, etc.).
+- **The Craft & Heritage Showcase**: High-resolution photography of authentic brassware, slow-roasted mawa, and signature Pede alongside poetic storytelling.
+- **Data-Driven Architecture**: Modular data configuration (`src/data/`) for products, milestones, testimonials, and gallery, architected for seamless future e-commerce activation.
+- **SEO & Schema Optimized**: Includes full `FoodEstablishment` JSON-LD structured data, OpenGraph previews, and localized metadata.
+
+---
+
+## ✦ Tech Stack
+
+- **Framework**: [Next.js 16](https://nextjs.org) (App Router, Turbopack, SSG)
+- **Language**: TypeScript
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com)
+- **Animations**: [Framer Motion](https://www.framer-motion.com)
+- **Mapping**: `@svg-maps/india`
+- **Typography**: Playfair Display (Serif), Inter (Sans-serif), Tiro Devanagari Hindi
+
+---
+
+## ✦ Getting Started
+
+### Prerequisites
+- Node.js 18+ (Node.js 20+ recommended)
+- npm or pnpm
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/ds1805/BPW.git
+cd BPW
+
+# Install dependencies
+npm install
+
+# Start local development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit [http://localhost:3000](http://localhost:3000) to view the website.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Production Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run start
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## ✦ Location & Contact
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Address**: Ward No. 57, Bhaiji Chowk near SenMandir, Sabji Mandi Road, Churu, Rajasthan — 331001
+- **Google Maps**: [View on Google Maps](https://share.google/KSc1VkF2Uhu1PeM1m)
+- **Hours**: Monday to Saturday: 8:00 AM – 8:00 PM | Sunday: Closed | Festive: 8:00 AM – 9:00 PM
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*Designed & developed with devotion to traditional craftsmanship.*
