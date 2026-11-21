@@ -51,6 +51,15 @@ export const metadata: Metadata = {
   verification: {
     google: "[GOOGLE_SEARCH_CONSOLE_VERIFICATION – TO BE UPDATED]",
   },
+  icons: {
+    icon: [
+      { url: "/images/bpw-logo.jpg", type: "image/jpeg" },
+    ],
+    shortcut: "/images/bpw-logo.jpg",
+    apple: [
+      { url: "/images/bpw-logo.jpg", type: "image/jpeg" },
+    ],
+  },
 };
 
 const jsonLd = {
@@ -97,6 +106,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <link rel="icon" href="/images/bpw-logo.jpg" type="image/jpeg" />
+        <link rel="shortcut icon" href="/images/bpw-logo.jpg" type="image/jpeg" />
+        <link rel="apple-touch-icon" href="/images/bpw-logo.jpg" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
