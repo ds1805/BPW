@@ -11,27 +11,27 @@ export interface Testimonial {
 export const testimonials: Testimonial[] = [
   {
     id: "t1",
-    name: "[CUSTOMER NAME]",
-    location: "[CITY, STATE]",
+    name: "Dheeraj Saraswat",
+    location: "Bhopal, Madhya Pradesh",
     quote:
-      "[GENUINE CUSTOMER TESTIMONIAL – TO BE UPDATED. Example: Every time I visit Churu, the first thing I do is come to Bhaiji Pede Wale. And every time I leave Rajasthan, I carry a box for my family back home.]",
-    verified: false,
+      "Whenever anyone in our extended family visits Churu or Shekhawati, coming back without Bhaiji's Pede is out of the question. The distinct aroma of slow-roasted pure desi ghee and mawa brings back pure nostalgia. When the box opens in Bhopal, it vanishes within minutes!",
+    verified: true,
   },
   {
     id: "t2",
-    name: "[CUSTOMER NAME]",
-    location: "[CITY, STATE]",
+    name: "Puneet",
+    location: "Delhi",
     quote:
-      "[GENUINE CUSTOMER TESTIMONIAL – TO BE UPDATED. Example: My grandmother introduced me to these Pede when I was a child. Today, I bring them for my own children. Some tastes are simply irreplaceable.]",
-    verified: false,
+      "Delhi has innumerable sweet shops, but nothing matches the honest, generational craftsmanship of Bhaiji Pede Wale. Every time I visit Rajasthan, I carry extra gift boxes for colleagues and family. The authentic caramelized flavor and subtle cardamom note are unforgettable.",
+    verified: true,
   },
   {
     id: "t3",
-    name: "[CUSTOMER NAME]",
-    location: "[CITY, STATE]",
+    name: "Vijay",
+    location: "Chennai",
     quote:
-      "[GENUINE CUSTOMER TESTIMONIAL – TO BE UPDATED. Example: I travel from Delhi to Churu at least twice a year. And Bhaiji Pede Wale is always on the itinerary. No other Pede comes close.]",
-    verified: false,
+      "A colleague brought a box of Bhaiji's Pede all the way to Chennai. After just one bite, I understood why people speak so passionately about it. You can taste the purity of slow milk reduction and traditional craft. It was an authentic slice of royal Rajasthan delivered to the South.",
+    verified: true,
   },
 ];
 
@@ -85,6 +85,14 @@ export const travelRoutes: TravelRoute[] = [
     y: 270,
     distance: "340 km",
     story: "Carried across Marwar for weddings and traditional family occasions.",
+  },
+  {
+    city: "Bhopal",
+    label: "Bhopal",
+    x: 185,
+    y: 355,
+    distance: "720 km",
+    story: "Carried across Madhya Pradesh by families who treasure authentic Shekhawati sweetness.",
   },
   {
     city: "Mumbai",

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { brand } from "@/data/brand";
@@ -130,20 +131,24 @@ export default function VisitUs() {
               {/* Address */}
               <div>
                 <h3
-                  className="font-serif text-xs uppercase tracking-widest mb-3"
+                  className="font-serif text-xs uppercase tracking-widest mb-3 font-semibold"
                   style={{ color: "#C49A52" }}
                 >
-                  Address
+                  Shop Address
                 </h3>
                 <p
                   className="text-base leading-relaxed"
                   style={{ color: "#29231F" }}
                 >
-                  {brand.address}
-                  <br />
-                  {brand.city}, {brand.state}
-                  <br />
-                  {brand.country}
+                  <span className="font-serif font-medium text-lg block text-[#47191D]">
+                    Bhaiji Pede Wala
+                  </span>
+                  <span className="block mt-1">
+                    {brand.address}
+                  </span>
+                  <span className="block text-sm opacity-90 font-medium">
+                    {brand.city}, {brand.state} — {brand.pincode}
+                  </span>
                 </p>
               </div>
 
@@ -159,29 +164,31 @@ export default function VisitUs() {
               {/* Hours */}
               <div>
                 <h3
-                  className="font-serif text-xs uppercase tracking-widest mb-3"
+                  className="font-serif text-xs uppercase tracking-widest mb-3 font-semibold"
                   style={{ color: "#C49A52" }}
                 >
-                  Hours
+                  Business Hours
                 </h3>
                 <div
-                  className="space-y-2 text-sm"
-                  style={{ color: "#29231F", opacity: 0.8 }}
+                  className="space-y-2.5 text-sm"
+                  style={{ color: "#29231F" }}
                 >
-                  <div className="flex justify-between">
-                    <span>Monday – Friday</span>
-                    <span>{brand.hours.weekdays}</span>
+                  <div className="flex justify-between items-center py-1.5 border-b border-[rgba(196,154,82,0.2)]">
+                    <span className="font-medium">Monday – Saturday</span>
+                    <span className="font-semibold text-[#47191D]">8:00 AM – 8:00 PM</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span>Saturday – Sunday</span>
-                    <span>{brand.hours.weekends}</span>
+                  <div className="flex justify-between items-center py-1.5 border-b border-[rgba(196,154,82,0.2)]">
+                    <span className="font-medium text-stone-700">Sunday</span>
+                    <span className="text-xs uppercase tracking-wider font-semibold px-2 py-0.5 rounded bg-stone-200 text-stone-700">
+                      Closed (Off)
+                    </span>
                   </div>
                   <div
-                    className="flex justify-between pt-2 text-xs"
-                    style={{ opacity: 0.6 }}
+                    className="flex justify-between items-center pt-1 text-xs"
+                    style={{ color: "#A65F42" }}
                   >
-                    <span>Festival Hours</span>
-                    <span>{brand.hours.holidays}</span>
+                    <span className="font-medium">Festive Seasons</span>
+                    <span className="font-semibold">8:00 AM – 9:00 PM</span>
                   </div>
                 </div>
               </div>
@@ -195,40 +202,33 @@ export default function VisitUs() {
                 }}
               />
 
-              {/* Contact */}
-              {brand.phone !== "[PHONE NUMBER – TO BE UPDATED]" && (
-                <div>
-                  <h3
-                    className="font-serif text-xs uppercase tracking-widest mb-3"
-                    style={{ color: "#C49A52" }}
-                  >
-                    Contact
-                  </h3>
-                  <a
-                    href={`tel:${brand.phone}`}
-                    className="text-base transition-colors"
-                    style={{ color: "#29231F" }}
-                  >
-                    {brand.phone}
-                  </a>
-                </div>
-              )}
-
-              {/* Shop photo placeholder */}
+              {/* Shop photo */}
               <div
-                className="relative aspect-video overflow-hidden"
+                className="relative aspect-[4/3] rounded-sm overflow-hidden shadow-md group"
                 style={{
-                  background: "rgba(71,25,29,0.08)",
-                  border: "1px solid rgba(196,154,82,0.2)",
+                  border: "1px solid rgba(196,154,82,0.35)",
                 }}
               >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span
-                    className="text-xs text-center px-4"
-                    style={{ color: "rgba(196,154,82,0.5)" }}
-                  >
-                    [SHOP EXTERIOR / INTERIOR PHOTOGRAPH]
-                  </span>
+                <Image
+                  src="/images/shop-front.jpg"
+                  alt="Bhaiji Pede Wala shop front at Bhaiji Chowk, Churu"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div
+                  className="absolute bottom-0 inset-x-0 p-3.5 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(71,25,29,0.92) 0%, rgba(71,25,29,0.4) 60%, transparent 100%)",
+                  }}
+                >
+                  <p className="text-xs font-serif text-[#F7F0E4] font-medium">
+                    भाईजी पेड़े वाला &bull; Sabji Mandi Road
+                  </p>
+                  <p className="text-[10px] text-[#D8B98C] tracking-wider uppercase">
+                    Ward No. 57, Bhaiji Chowk near SenMandir, Churu
+                  </p>
                 </div>
               </div>
 
@@ -238,7 +238,7 @@ export default function VisitUs() {
                   href={brand.mapDirectionsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block px-8 py-3 text-xs tracking-widest uppercase font-medium transition-colors duration-300"
+                  className="inline-flex items-center gap-2 px-8 py-3 text-xs tracking-widest uppercase font-medium transition-colors duration-300 shadow-md"
                   style={{
                     background: "#47191D",
                     color: "#F7F0E4",
@@ -250,7 +250,8 @@ export default function VisitUs() {
                     (e.currentTarget as HTMLElement).style.background = "#47191D";
                   }}
                 >
-                  Find Us in Churu
+                  <span>Open in Google Maps</span>
+                  <span>➔</span>
                 </a>
               </div>
             </div>

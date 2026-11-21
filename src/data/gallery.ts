@@ -39,9 +39,9 @@ export const galleryImages: GalleryImage[] = [
   },
   {
     id: "g5",
-    src: "/images/placeholder/gallery-shop-exterior.jpg",
-    alt: "Bhaiji Pede Wale shop exterior in Churu",
-    caption: "The landmark shop in Churu, welcoming travellers and locals for decades.",
+    src: "/images/shop-front.jpg",
+    alt: "Bhaiji Pede Wala shop front at Bhaiji Chowk, Churu",
+    caption: "The landmark shop at Bhaiji Chowk, Sabji Mandi Road, Churu — where our sweet legacy began.",
     category: "shop",
   },
   {

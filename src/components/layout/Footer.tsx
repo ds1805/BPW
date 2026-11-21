@@ -94,7 +94,19 @@ export function Footer() {
             </h3>
             <div className="space-y-3 text-sm" style={{ color: "rgba(247,240,228,0.65)" }}>
               <p>{brand.address}</p>
-              <p>{brand.city}, {brand.state}</p>
+              <p>{brand.city}, {brand.state} — {brand.pincode}</p>
+              <p>
+                <a
+                  href={brand.mapDirectionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs tracking-wider uppercase font-medium hover:text-[#D8B98C] transition-colors"
+                  style={{ color: "#C49A52" }}
+                >
+                  <span>Open in Google Maps</span>
+                  <span>↗</span>
+                </a>
+              </p>
               {brand.phone !== "[PHONE NUMBER – TO BE UPDATED]" && (
                 <p>
                   <a

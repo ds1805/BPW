@@ -325,11 +325,10 @@ export default function Memories() {
           </div>
 
           <p
-            className="text-center text-xs mt-6"
-            style={{ color: "rgba(247,240,228,0.3)" }}
+            className="text-center text-xs mt-8 font-serif italic"
+            style={{ color: "rgba(247,240,228,0.4)" }}
           >
-            * Testimonials above are placeholder content. Replace with verified
-            customer quotes only.
+            ✦ Shared with affection by our patrons carrying the taste of Churu across India ✦
           </p>
         </div>
       </div>
